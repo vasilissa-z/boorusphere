@@ -1,4 +1,4 @@
-package io.chaldeaprjkt.boorusphere
+package net.vasilissa.boorusphere
 
 import StorageUtil
 import android.content.Context

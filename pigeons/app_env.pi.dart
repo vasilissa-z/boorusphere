@@ -4,7 +4,7 @@ import 'package:pigeon/pigeon.dart';
   PigeonOptions(
     dartOut: 'lib/pigeon/app_env.pi.dart',
     kotlinOut:
-        'android/app/src/main/kotlin/io/chaldeaprjkt/boorusphere/pigeon/AppEnv.pi.kt',
+        'android/app/src/main/kotlin/net/vasilissa/boorusphere/pigeon/AppEnv.pi.kt',
     kotlinOptions: KotlinOptions(errorClassName: 'AppEnvException'),
   ),
 )

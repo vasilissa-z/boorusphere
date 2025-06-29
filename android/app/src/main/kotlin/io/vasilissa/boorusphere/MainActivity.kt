@@ -1,4 +1,4 @@
-package io.chaldeaprjkt.boorusphere
+package net.vasilissa.boorusphere
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

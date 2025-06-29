@@ -1,9 +1,9 @@
-package io.chaldeaprjkt.boorusphere
+package net.vasilissa.boorusphere
 
 import AppEnv
 import Env
 import android.os.Build
-import io.chaldeaprjkt.boorusphere.BuildConfig as BuildInfo // make sure that we use proper BuildConfig
+import net.vasilissa.boorusphere.BuildConfig as BuildInfo // make sure that we use proper BuildConfig
 
 class AndroidAppEnv : AppEnv {
     override fun get(): Env {

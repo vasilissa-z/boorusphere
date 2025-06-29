@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.chaldeaprjkt.boorusphere">
+    package="net.vasilissa.boorusphere">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -36,7 +36,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="io.chaldeaprjkt.boorusphere.flutter_downloader.provider"
+            android:authorities="net.vasilissa.boorusphere.flutter_downloader.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
