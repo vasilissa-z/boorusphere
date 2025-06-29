@@ -1,29 +1,11 @@
-# This repository has been archived
-
-Boorusphere was supposed to be a simple booru viewer, but due to lack of interest, especially in flutter, it was shut down on July 19, 2024. It remains here for history's sake, although it serves no inherent purpose.
-
-<br/><br/>
-
 <div align="center">
     <div><img src="assets/icons/exported/legacy-circle.png" alt="boorusphere icon" height="92"></div>
     <div><h1 align="center">Boorusphere</h1></div>
     <div>Simple, content-focused booru viewer for Android</div>
-    <br/>
-    <div>
-        <a href="https://github.com/nullxception/boorusphere/stargazers">
-            <img alt="Stargazers" src="https://img.shields.io/github/stars/nullxception/boorusphere?style=for-the-badge&logo=apachespark&logoColor=ebebf0&color=ff89b5&labelColor=23232F"/>
-        </a>
-        <a href="https://github.com/nullxception/boorusphere/releases/latest">
-            <img alt="Latest release" src="https://img.shields.io/github/v/release/nullxception/boorusphere?style=for-the-badge&logo=pkgsrc&logoColor=ebebf0&labelColor=23232F&color=95b6ff">
-        </a>
-        <a href="https://github.com/nullxception/boorusphere/actions">
-            <img alt="Workflow status" src="https://img.shields.io/github/actions/workflow/status/nullxception/boorusphere/ci.yml?style=for-the-badge&logo=githubactions&logoColor=ebebf0&labelColor=23232F&label=CI">
-        </a>
-        <a href="https://github.com/nullxception/boorusphere/blob/main/LICENSE.md">
-            <img alt="License" src="https://img.shields.io/github/license/nullxception/boorusphere?style=for-the-badge&logo=gitbook&logoColor=ebebf0&color=b0a8f7&labelColor=23232F"/>
-        </a>
-    </div>
 </div>
+
+**Fork info:**  
+This is a fork of the original Boorusphere. Branding is left as-is for now, as there aren't any plans for bigger maintenance, rather just few simple bug fixes. Code changed may be suboptimal as it's my first time using flutter.
 
 # Features
 
@@ -49,6 +31,8 @@ Boorusphere was supposed to be a simple booru viewer, but due to lack of interes
 # Building from Source
 
 - Install Flutter SDK, visit [flutter.dev](https://flutter.dev/) for more information.
+
+`shell.nix` is provided for Nix users.
 
 - Fetch latest source code
 

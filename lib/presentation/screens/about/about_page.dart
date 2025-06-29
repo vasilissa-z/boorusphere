@@ -52,7 +52,9 @@ class AboutPage extends ConsumerWidget {
                 child: appVersions.maybeWhen(
                   data: (data) {
                     return Text(
-                      context.t.version(version: '${data.current} - $kAppArch'),
+                      context.t.version(
+                          version:
+                              '${data.current} (vasilissa ver.) - $kAppArch'),
                       style: context.theme.textTheme.titleSmall
                           ?.copyWith(fontWeight: FontWeight.w400),
                     );
