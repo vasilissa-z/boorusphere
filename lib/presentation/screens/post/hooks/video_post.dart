@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:boorusphere/data/provider.dart';
 import 'package:boorusphere/data/repository/booru/entity/post.dart';
 import 'package:boorusphere/presentation/provider/booru/post_headers_factory.dart';
-import 'package:boorusphere/presentation/provider/cache.dart';
 import 'package:boorusphere/presentation/utils/extensions/post.dart';
 import 'package:boorusphere/utils/extensions/string.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -67,41 +69,34 @@ class _VideoPostState extends HookState<VideoPostSource, _VideoPostHook> {
   _VideoPostState();
 
   VideoPostSource source = VideoPostSource();
-
-  void onFileStream(FileResponse event) {
-    if (!context.mounted) return;
-
-    if (event is DownloadProgress) {
-      setState(() {
-        source = source.copyWith(progress: event);
-      });
-    } else if (event is FileInfo) {
-      final controller = VideoPlayerController.file(event.file,
-          videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
-        ..setLooping(true);
-      final size = event.file.statSync().size;
-      final prog = DownloadProgress(event.originalUrl, size, size);
-
-      setState(() {
-        source = source.copyWith(controller: controller, progress: prog);
-      });
-    }
-  }
+  bool disposed = false;
 
   Future<void> createController() async {
     if (!hook.active) return;
 
-    final cache = hook.ref.read(cacheManagerProvider);
     final cookieJar = hook.ref.read(cookieJarProvider);
-    final cookies =
-        await cookieJar.loadForRequest(hook.post.content.url.toUri());
-    final headers =
+    final url = hook.post.content.url.toUri();
+    final cookies = await cookieJar.loadForRequest(url);
+    var headers =
         hook.ref.read(postHeadersFactoryProvider(hook.post, cookies: cookies));
+    if (cookies.isNotEmpty) {
+      headers.putIfAbsent(
+          HttpHeaders.cookieHeader, () => CookieManager.getCookies(cookies));
+    }
 
-    cache
-        .getFileStream(hook.post.content.url,
-            headers: headers, withProgress: true)
-        .listen(onFileStream);
+    final controller =
+        VideoPlayerController.networkUrl(url, httpHeaders: headers);
+    await controller.initialize();
+    if (disposed) {
+      await controller.dispose();
+      return;
+    }
+    setState(() {
+      source = source.copyWith(
+          controller: controller,
+          progress: DownloadProgress(url.toString(), 1, 1));
+    });
+    await source.controller?.setLooping(true);
   }
 
   void destroyController() {
@@ -131,6 +126,7 @@ class _VideoPostState extends HookState<VideoPostSource, _VideoPostHook> {
   @override
   void dispose() {
     destroyController();
+    disposed = true;
     super.dispose();
   }
 
